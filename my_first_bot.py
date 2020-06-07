@@ -28,6 +28,7 @@ async def subscribe(message: types.Message):
 
     await message.answer("Yoy successfully subscribed to the newsletter!\nWait and soon you will know about new videos")    
 
+# Unsubscribe activation command
 @dp.message_handler(commands = ['unsubscribe'])
 async def unsubscribe(message: types.Message):
     if not db.subscriber_exists(message.from_user.id):
