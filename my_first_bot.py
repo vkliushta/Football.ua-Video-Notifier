@@ -47,19 +47,18 @@ async def scheduled(wait_for):
         await asyncio.sleep(wait_for)
 
         # Parsing
-        videos = parse()
+        video = parse()
 
-        if db.last_video()[0][0] != videos[0]:
+        if db.last_video()[0] != video:
 
             # Get bot subscribers
             subscriptions = db.get_subscriptions()
-
             # Send message
             for s in subscriptions:
-                if s[2] == True:
-                    await bot.send_message(s[1], f'Hi! Here is a new video from football.ua. Enjoy\n\n{videos[0]}')
+                if s[2]:
+                    await bot.send_message(s[1], f'Hi! Here is a new video from football.ua. Enjoy\n\n{video}')
 
-            db.update_video(videos[0])
+            db.update_video(video)
 
 # Start long polling
 if __name__ == '__main__':

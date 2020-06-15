@@ -15,9 +15,8 @@ def get_content(html):
     '''Get last and second last video from site'''
     soup = BeautifulSoup(html, "html.parser")
     first_video = str(soup.find_all("div", {'class': 'intro'})).split()
-    second_video = str(soup.find_all("ul", {'class': 'archive-list'})).split()[4][6:-2]
     first_video = first_video[8][6:first_video[8].find('.html') + 5]
-    return [first_video, second_video]
+    return first_video
 
 
 def parse():
