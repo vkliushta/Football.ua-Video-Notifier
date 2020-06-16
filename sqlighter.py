@@ -31,7 +31,7 @@ class SQLighter:
     def last_video(self, id_ = 1):
         '''Return last video'''
         with self.connection:
-            return self.cursor.execute('SELECT `video` FROM `last_video` WHERE `id` = ?', (id_,)).fetchall()
+            return self.cursor.execute('SELECT `video` FROM `last_video` WHERE `id` = ?', (id_,)).fetchone()
 
     def update_video(self, video, id_ = 1):
         '''Update last video'''
