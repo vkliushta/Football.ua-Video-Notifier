@@ -7,17 +7,18 @@ from sqlighter import SQLighter
 from video_parser import parse
 
 # Set log level
-logging.basicConfig(level = logging.INFO)
+logging.basicConfig(level=logging.INFO)
 
-# bot inizialization
-bot = Bot(token = config.API_TOKEN)
+# bot initialization
+bot = Bot(token=config.API_TOKEN)
 dp = Dispatcher(bot)
 
-# Іnitialize the connection to the database
+# initialization the connection to the database
 db = SQLighter('db.db')
 
+
 # Subscribe activation command
-@dp.message_handler(commands = ['subscribe'])
+@dp.message_handler(commands=['subscribe'])
 async def subscribe(message: types.Message):
     if not db.subscriber_exists(message.from_user.id):
         # If there is no user, than add new user
@@ -28,8 +29,9 @@ async def subscribe(message: types.Message):
 
     await message.answer("Yoy successfully subscribed to the newsletter!\nWait and soon you will know about new videos")    
 
+
 # Unsubscribe activation command
-@dp.message_handler(commands = ['unsubscribe'])
+@dp.message_handler(commands=['unsubscribe'])
 async def unsubscribe(message: types.Message):
     if not db.subscriber_exists(message.from_user.id):
         # If there is no user, than add new user with no active status
@@ -63,4 +65,4 @@ async def scheduled(wait_for):
 # Start long polling
 if __name__ == '__main__':
     dp.loop.create_task(scheduled(5))
-    executor.start_polling(dp, skip_updates = True)
+    executor.start_polling(dp, skip_updates=True)
